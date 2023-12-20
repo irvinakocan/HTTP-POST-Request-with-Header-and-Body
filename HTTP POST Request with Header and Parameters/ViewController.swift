@@ -33,6 +33,20 @@ class ViewController: UIViewController {
         // Set HTTP Request Header
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
+        // Specify parameters
+        let parameters = [
+            "username": "@kilo_loco",
+            "tweet": "HelloWorld"
+        ]
+        
+        // Turning parameters into JSON
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters) else {
+            return
+        }
+        
+        // Setting HTTP Request httpBody (request message)
+        urlRequest.httpBody = httpBody
+        
         let task = URLSession.shared.dataTask(with: urlRequest, completionHandler: {
             (data, response, error) in
             
